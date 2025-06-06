@@ -200,6 +200,21 @@ class TestToGeminiSchema:
         == Type.STRING
     )
 
+  def test_to_gemini_schema_root_ref(self):
+    """A root level $ref should be resolved."""
+    openapi_schema = {
+        "$ref": "#/$defs/MyModel",
+        "$defs": {
+            "MyModel": {
+                "type": "object",
+                "properties": {"field": {"type": "string"}},
+            }
+        },
+    }
+    gemini_schema = _to_gemini_schema(openapi_schema)
+    assert gemini_schema.type == Type.OBJECT
+    assert gemini_schema.properties["field"].type == Type.STRING
+
   def test_to_gemini_schema_converts_property_dict(self):
     openapi_schema = {
         "properties": {
