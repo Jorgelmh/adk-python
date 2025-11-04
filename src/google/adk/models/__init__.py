@@ -20,6 +20,7 @@ from .gemma_llm import Gemma
 from .google_llm import Gemini
 from .llm_request import LlmRequest
 from .llm_response import LlmResponse
+from .openai_responses_llm import OpenAIResponsesLlm
 from .registry import LLMRegistry
 
 __all__ = [
@@ -27,9 +28,11 @@ __all__ = [
     'Gemini',
     'Gemma',
     'LLMRegistry',
+    'OpenAIResponsesLlm',
 ]
 
 
 LLMRegistry.register(Gemini)
 LLMRegistry.register(Gemma)
 LLMRegistry.register(ApigeeLlm)
+LLMRegistry.register(OpenAIResponsesLlm)
